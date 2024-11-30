@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 
 import type { User as UserType } from '@types';
 
-import { User, AddButton } from './components';
+import { User, AddButton, Empty } from './components';
 
 export const Users = () => {
   const usersString = localStorage.getItem('users') || '[]';
@@ -10,6 +10,10 @@ export const Users = () => {
 
   return (
     <div className="w-960 m-auto">
+      {!users.length && (
+        <Empty />
+      )}
+
       {users.map((userCur: UserType) => {
         return (
           <User key={nanoid()} user={userCur} />
