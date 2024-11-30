@@ -1,15 +1,33 @@
+import { useDispatch } from 'react-redux';
+
+import { useNavigate } from 'react-router';
+
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 
+import type { User as UserType } from '@types';
+
+import { mainActions } from 'store/main';
+
 export type UserProps = {
-  name: string;
-  email: string;
+  user: UserType;
 };
 
-export const User = ({ name, email }: UserProps) => {
+export const User = ({ user }: UserProps) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const clickHandler = () => {
+    dispatch(mainActions.setUser(user));
+
+    navigate('user-info');
+  };
+
+  const { name, email } = user;
+
   return (
-    <Card>
+    <Card onClick={clickHandler}>
       <CardContent>
         <Typography variant="h5" component="div">
           {name}

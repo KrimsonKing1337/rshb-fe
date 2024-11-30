@@ -1,6 +1,6 @@
-import type { User } from '@types';
+import type { User as UserType } from '@types';
 
-import { User as UserComponent, AddButton } from './components';
+import { User, AddButton } from './components';
 
 export const Users = () => {
   const usersString = localStorage.getItem('users') || '[]';
@@ -8,11 +8,9 @@ export const Users = () => {
 
   return (
     <div>
-      {users.map((userCur: User) => {
-        const { name, email } = userCur;
-
+      {users.map((userCur: UserType) => {
         return (
-          <UserComponent name={name} email={email} />
+          <User user={userCur} />
         );
       })}
 
