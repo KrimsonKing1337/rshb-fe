@@ -1,7 +1,10 @@
-import { User } from './components';
+import { User, AddButton } from './components';
 
 export const Users = () => {
   return (
-    <User name="Имя Фамилия" email="Email" />
+    <div>
+      <User name="Имя Фамилия" email="Email" />
+      <AddButton />
+    </div>
   );
 };
