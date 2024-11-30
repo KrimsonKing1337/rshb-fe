@@ -4,16 +4,16 @@ import { State } from './@types';
 
 export const initialState: State = {
   name: '',
-  nameHasAnError: true,
+  nameHasAnError: false,
 
   email: '',
-  emailHasAnError: true,
+  emailHasAnError: false,
 
   city: '',
-  cityHasAnError: true,
+  cityHasAnError: false,
 
   phone: '',
-  phoneHasAnError: true,
+  phoneHasAnError: false,
 };
 
 const slice = createSlice({

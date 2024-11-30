@@ -1,28 +1,56 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { Button } from '@mui/material';
 
-import { inputsSelectors } from 'store/inputs';
+import type { User } from '@types';
+
+import { inputsActions, inputsSelectors } from 'store/inputs';
+
+import { defaultValidate, validateEmail, validatePhone } from './utils';
 
 export const AddButton = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const name = useSelector(inputsSelectors.name);
-  const nameHasAnError = useSelector(inputsSelectors.nameHasAnError);
-
   const email = useSelector(inputsSelectors.email);
-  const emailHasAnError = useSelector(inputsSelectors.emailHasAnError);
-
   const city = useSelector(inputsSelectors.city);
-  const cityHasAnError = useSelector(inputsSelectors.cityHasAnError);
-
   const phone = useSelector(inputsSelectors.phone);
-  const phoneHasAnError = useSelector(inputsSelectors.phoneHasAnError);
 
   const buttonOnClickHandler = () => {
+    let hasError = false;
+
+    if (!defaultValidate(name)) {
+      dispatch(inputsActions.setNameHasAnError(true));
+
+      hasError = true;
+    }
+
+    if (!defaultValidate(city)) {
+      dispatch(inputsActions.setCityHasAnError(true));
+
+      hasError = true;
+    }
+
+    if (!validateEmail(email)) {
+      dispatch(inputsActions.setEmailHasAnError(true));
+
+      hasError = true;
+    }
+
+    if (!validatePhone(phone)) {
+      dispatch(inputsActions.setPhoneHasAnError(true));
+
+      hasError = true;
+    }
+
+    if (hasError) {
+      return;
+    }
+
     const usersString = localStorage.getItem('users') || '[]';
-    const users = JSON.parse(usersString);
+    const users: User[] = JSON.parse(usersString);
 
     const newUser = {
       name,
@@ -38,16 +66,8 @@ export const AddButton = () => {
     navigate('/');
   };
 
-  let buttonIsDisabled = true;
-
-  if (nameHasAnError || emailHasAnError || phoneHasAnError || cityHasAnError) {
-    buttonIsDisabled = true;
-  } else if (!nameHasAnError && !emailHasAnError && !phoneHasAnError && !cityHasAnError) {
-    buttonIsDisabled = false;
-  }
-
   return (
-    <Button variant="contained" disabled={buttonIsDisabled} onClick={buttonOnClickHandler}>
+    <Button variant="contained" onClick={buttonOnClickHandler}>
       Добавить
     </Button>
   );

@@ -6,7 +6,6 @@ export type InputProps = {
   setter: (value: string) => unknown;
   errorSetter: (value: boolean) => unknown;
   hasAnError: boolean;
-  validate: (value: string) => boolean;
 };
 
 export type TextFieldChangeEvent = React.ChangeEvent<HTMLInputElement>;
@@ -18,16 +17,13 @@ export const Input = (
     setter,
     errorSetter,
     hasAnError,
-    validate,
   }: InputProps) => {
   const changeHandler = (e: TextFieldChangeEvent) => {
     const { value } = e.target;
 
     setter(value);
 
-    const validateResult = validate(value);
-
-    errorSetter(!validateResult);
+    errorSetter(false);
   };
 
   return (
