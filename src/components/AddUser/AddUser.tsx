@@ -7,7 +7,7 @@ import { Inputs } from './components';
 
 export const AddUser = () => {
   const buttonOnClickHandler = () => {
-    console.log('clicked');
+    console.log('buttonOnClick');
   };
 
   return (
