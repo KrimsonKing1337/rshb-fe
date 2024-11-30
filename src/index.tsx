@@ -2,6 +2,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { Provider } from 'react-redux';
 
+import '../styles/fonts';
+
 import { store } from 'store';
 
 import { Users, UserInfo, AddUser } from './components';

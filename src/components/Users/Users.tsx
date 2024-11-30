@@ -1,7 +1,7 @@
+import { User } from './components';
+
 export const Users = () => {
   return (
-    <div>
-      Здесь будет страница "пользователи"
-    </div>
+    <User name="Имя Фамилия" email="Email" />
   );
 };
