@@ -3,8 +3,8 @@ import TextField from '@mui/material/TextField';
 export type InputProps = {
   label: string;
   value: string;
-  setter: (React.Dispatch<React.SetStateAction<string>>);
-  errorSetter: (React.Dispatch<React.SetStateAction<boolean>>);
+  setter: (value: string) => unknown;
+  errorSetter: (value: boolean) => unknown;
   hasAnError: boolean;
   validate: (value: string) => boolean;
 };

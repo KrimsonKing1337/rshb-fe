@@ -1,25 +1,30 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useDispatch } from 'react-redux';
+import { nanoid } from 'nanoid';
 
-import { mainActions } from 'store/main';
+import { inputsActions, inputsSelectors } from 'store/inputs';
 
 import { Input } from '../Input';
+
+const nameUuid = nanoid();
+const emailUuid = nanoid();
+const cityUuid = nanoid();
+const phoneUuid = nanoid();
 
 export const Inputs = () => {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
-  const [nameHasAnError, setNameHasAnError] = useState(true);
+  const name = useSelector(inputsSelectors.name);
+  const nameHasAnError = useSelector(inputsSelectors.nameHasAnError);
 
-  const [email, setEmail] = useState('');
-  const [emailHasAnError, setEmailHasAnError] = useState(true);
+  const email = useSelector(inputsSelectors.email);
+  const emailHasAnError = useSelector(inputsSelectors.emailHasAnError);
 
-  const [city, setCity] = useState('');
-  const [cityHasAnError, setCityHasAnError] = useState(true);
+  const city = useSelector(inputsSelectors.city);
+  const cityHasAnError = useSelector(inputsSelectors.cityHasAnError);
 
-  const [phone, setPhone] = useState('');
-  const [phoneHasAnError, setPhoneHasAnError] = useState(true);
+  const phone = useSelector(inputsSelectors.phone);
+  const phoneHasAnError = useSelector(inputsSelectors.phoneHasAnError);
 
   const defaultValidate = (value: string) => {
     return value.length > 0;
@@ -37,43 +42,41 @@ export const Inputs = () => {
     return re.test(value);
   };
 
-  if (nameHasAnError || emailHasAnError || phoneHasAnError || cityHasAnError) {
-    dispatch(mainActions.setInputsHasAnError(true));
-  } else if (!nameHasAnError && !emailHasAnError && !phoneHasAnError && !cityHasAnError) {
-    dispatch(mainActions.setInputsHasAnError(false));
-  }
-
   const inputs = [
     {
+      uuid: nameUuid,
       label: 'Имя',
       value: name,
-      setter: setName,
+      setter: (value: string) => dispatch(inputsActions.setName(value)),
       hasAnError: nameHasAnError,
-      errorSetter: setNameHasAnError,
+      errorSetter: (value: boolean) => dispatch(inputsActions.setNameHasAnError(value)),
       validate: defaultValidate,
     },
     {
+      uuid: emailUuid,
       label: 'Email',
       value: email,
-      setter: setEmail,
+      setter: (value: string) => dispatch(inputsActions.setEmail(value)),
       hasAnError: emailHasAnError,
-      errorSetter: setEmailHasAnError,
+      errorSetter: (value: boolean) => dispatch(inputsActions.setEmailHasAnError(value)),
       validate: validateEmail,
     },
     {
+      uuid: cityUuid,
       label: 'Город',
       value: city,
-      setter: setCity,
+      setter: (value: string) => dispatch(inputsActions.setCity(value)),
       hasAnError: cityHasAnError,
-      errorSetter: setCityHasAnError,
+      errorSetter: (value: boolean) => dispatch(inputsActions.setCityHasAnError(value)),
       validate: defaultValidate,
     },
     {
+      uuid: phoneUuid,
       label: 'Телефон',
       value: phone,
-      setter: setPhone,
+      setter: (value: string) => dispatch(inputsActions.setPhone(value)),
       hasAnError: phoneHasAnError,
-      errorSetter: setPhoneHasAnError,
+      errorSetter: (value: boolean) => dispatch(inputsActions.setPhoneHasAnError(value)),
       validate: validatePhone,
     },
   ];
@@ -82,6 +85,7 @@ export const Inputs = () => {
     <div>
       {inputs.map((inputCur) => {
         const {
+          uuid,
           label,
           value,
           setter,
@@ -92,6 +96,7 @@ export const Inputs = () => {
 
         return (
           <Input
+            key={uuid}
             label={label}
             value={value}
             setter={setter}
