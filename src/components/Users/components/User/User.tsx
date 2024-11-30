@@ -27,7 +27,7 @@ export const User = ({ user }: UserProps) => {
   const { name, email } = user;
 
   return (
-    <Card onClick={clickHandler}>
+    <Card className="cursor-pointer mt-5" onClick={clickHandler}>
       <CardContent>
         <Typography variant="h5" component="div">
           {name}

@@ -48,24 +48,26 @@ export const UserInfo = () => {
   ];
 
   return (
-    <Card>
-      <CardHeader title="x" onClick={headerClickHandler} />
+    <div className="w-960 m-auto mt-5">
+      <Card>
+        <CardHeader className="cursor-pointer" title="x" onClick={headerClickHandler} />
 
-      <CardContent>
-        <Typography variant="h5" component="div">
-          {name}
-        </Typography>
+        <CardContent>
+          <Typography variant="h5" component="div">
+            {name}
+          </Typography>
 
-        {values.map((valueCur) => {
-          const { label, value } = valueCur;
+          {values.map((valueCur) => {
+            const { label, value } = valueCur;
 
-          return (
-            <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
-              {label}: {value}
-            </Typography>
-          );
-        })}
-      </CardContent>
-    </Card>
+            return (
+              <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
+                {label}: {value}
+              </Typography>
+            );
+          })}
+        </CardContent>
+      </Card>
+    </div>
   );
 };

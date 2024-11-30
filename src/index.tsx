@@ -2,7 +2,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import { Provider } from 'react-redux';
 
-import '../styles/fonts';
+import '../styles/styles.scss';
+import '../styles/tailwind.css';
 
 import { store } from 'store';
 

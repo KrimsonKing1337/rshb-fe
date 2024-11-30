@@ -67,7 +67,7 @@ export const AddButton = () => {
   };
 
   return (
-    <Button variant="contained" onClick={buttonOnClickHandler}>
+    <Button className="!mt-5" variant="contained" onClick={buttonOnClickHandler}>
       Добавить
     </Button>
   );

@@ -15,18 +15,20 @@ export const AddUser = () => {
   };
 
   return (
-    <Card>
-      <CardHeader title="x" onClick={headerClickHandler} />
+    <div className="w-960 m-auto mt-5">
+      <Card>
+        <CardHeader className="cursor-pointer" title="x" onClick={headerClickHandler} />
 
-      <CardContent>
-        <Typography variant="h5" component="div">
-          Добавить пользователя
-        </Typography>
+        <CardContent>
+          <Typography variant="h5" component="div">
+            Добавить пользователя
+          </Typography>
 
-        <Inputs />
+          <Inputs />
 
-        <AddButton />
-      </CardContent>
-    </Card>
+          <AddButton />
+        </CardContent>
+      </Card>
+    </div>
   );
 };

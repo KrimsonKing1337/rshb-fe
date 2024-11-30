@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import TextField from '@mui/material/TextField';
 
 export type InputProps = {
@@ -18,6 +20,12 @@ export const Input = (
     errorSetter,
     hasAnError,
   }: InputProps) => {
+  useEffect(() => {
+    return () => {
+      errorSetter(false);
+    };
+  }, []);
+
   const changeHandler = (e: TextFieldChangeEvent) => {
     const { value } = e.target;
 
@@ -28,6 +36,7 @@ export const Input = (
 
   return (
     <TextField
+      className="!mt-5"
       error={hasAnError}
       label={label}
       variant="outlined"

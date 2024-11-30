@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 import type { User as UserType } from '@types';
 
 import { User, AddButton } from './components';
@@ -7,10 +9,10 @@ export const Users = () => {
   const users = JSON.parse(usersString);
 
   return (
-    <div>
+    <div className="w-960 m-auto">
       {users.map((userCur: UserType) => {
         return (
-          <User user={userCur} />
+          <User key={nanoid()} user={userCur} />
         );
       })}
 
