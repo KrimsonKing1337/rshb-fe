@@ -1,10 +1,13 @@
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import { Button } from '@mui/material';
 
 import { inputsSelectors } from 'store/inputs';
 
 export const AddButton = () => {
+  const navigate = useNavigate();
+
   const name = useSelector(inputsSelectors.name);
   const nameHasAnError = useSelector(inputsSelectors.nameHasAnError);
 
@@ -31,6 +34,8 @@ export const AddButton = () => {
     const newUsers = [...users, newUser];
 
     localStorage.setItem('users', JSON.stringify(newUsers));
+
+    navigate('/');
   };
 
   let buttonIsDisabled = true;
