@@ -1,17 +1,34 @@
+import { useEffect } from 'react';
+
 import { useSelector } from 'react-redux';
 
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+
+import { useNavigate } from 'react-router';
 
 import { mainSelectors } from 'store/main';
 
 export const UserInfo = () => {
+  const navigate = useNavigate();
+
   const user = useSelector(mainSelectors.user);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/');
+    }
+  }, [user]);
 
   if (!user) {
     return;
   }
+
+  const headerClickHandler = () => {
+    navigate('/');
+  };
 
   const { name, email, city, phone } = user;
 
@@ -32,6 +49,8 @@ export const UserInfo = () => {
 
   return (
     <Card>
+      <CardHeader title="x" onClick={headerClickHandler} />
+
       <CardContent>
         <Typography variant="h5" component="div">
           {name}
