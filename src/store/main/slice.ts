@@ -3,18 +3,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { State } from './@types';
 
 export const initialState: State = {
-  count: 0,
+  inputsHasAnError: false,
 };
 
 const slice = createSlice({
-  name: '@counter',
+  name: '@main',
   initialState,
   reducers: {
-    setCount(state, action: PayloadAction<State['count']>) {
-      state.count = action.payload;
+    setInputsHasAnError(state, action: PayloadAction<boolean>) {
+      state.inputsHasAnError = action.payload;
     },
-    increment() {},
-    decrement() {},
   },
 });
 

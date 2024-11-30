@@ -1,19 +1,25 @@
-import { useState } from 'react';
-
 import TextField from '@mui/material/TextField';
 
 export type InputProps = {
   label: string;
   value: string;
   setter: (React.Dispatch<React.SetStateAction<string>>);
+  errorSetter: (React.Dispatch<React.SetStateAction<boolean>>);
+  hasAnError: boolean;
   validate: (value: string) => boolean;
 };
 
 export type TextFieldChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
-export const Input = ({ label, value, setter, validate }: InputProps) => {
-  const [isError, setIsError] = useState(false);
-
+export const Input = (
+  {
+    label,
+    value,
+    setter,
+    errorSetter,
+    hasAnError,
+    validate,
+  }: InputProps) => {
   const changeHandler = (e: TextFieldChangeEvent) => {
     const { value } = e.target;
 
@@ -21,12 +27,12 @@ export const Input = ({ label, value, setter, validate }: InputProps) => {
 
     const validateResult = validate(value);
 
-    setIsError(!validateResult);
+    errorSetter(!validateResult);
   };
 
   return (
     <TextField
-      error={isError}
+      error={hasAnError}
       label={label}
       variant="outlined"
       sx={{ display: 'block' }}
