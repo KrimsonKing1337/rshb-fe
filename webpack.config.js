@@ -91,6 +91,12 @@ module.exports = (env = {}, argv) => {
       historyApiFallback: true,
       hot: true,
       liveReload: true,
+      proxy: [
+        {
+          context: ['/api'],
+          target: 'http://localhost:3000',
+        },
+      ],
     },
     output: {
       publicPath: '/',
