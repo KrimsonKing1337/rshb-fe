@@ -8,7 +8,8 @@
 https://github.com/KrimsonKing1337/rshb-be
 
 Затем даём команду
-```npm run start```
+```npm run start```\
+И открываем в браузере http://localhost:3001
 
 В проекте используется три главных компонента:\
 ```Users``` для отображения списка пользователей\
