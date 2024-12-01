@@ -4,17 +4,19 @@ import { nanoid } from 'nanoid';
 
 import type { User as UserType } from '@types';
 
-import { addUser, getUsers } from 'api';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { mainActions, mainSelectors } from 'store/main';
 
 import { User, AddButton, Empty } from './components';
 
 export const Users = () => {
-  const usersString = localStorage.getItem('users') || '[]';
-  const users = JSON.parse(usersString);
+  const dispatch = useDispatch();
+
+  const users = useSelector(mainSelectors.users);
 
   useEffect(() => {
-    addUser();
-    getUsers();
+    dispatch(mainActions.fetchUsers());
   }, []);
 
   return (

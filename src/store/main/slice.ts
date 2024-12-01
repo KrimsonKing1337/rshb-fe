@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { State } from './@types';
+import type { User } from '@types';
+
+import type { State } from './@types';
 
 export const initialState: State = {
   user: null,
+  users: [],
 };
 
 const slice = createSlice({
@@ -13,6 +16,14 @@ const slice = createSlice({
     setUser(state, action: PayloadAction<State['user']>) {
       state.user = action.payload;
     },
+
+    fetchUsers() {},
+    setUsers(state, action: PayloadAction<State['users']>) {
+      state.users = action.payload;
+    },
+
+    // eslint-disable-next-line
+    fetchPutUser(_state, _action: PayloadAction<User>) {},
   },
 });
 

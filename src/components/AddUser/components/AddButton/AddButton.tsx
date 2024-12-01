@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router';
 
 import { Button } from '@mui/material';
 
-import type { User } from '@types';
-
 import { inputsActions, inputsSelectors } from 'store/inputs';
+import { mainActions } from 'store/main';
 
 import { defaultValidate, validateEmail, validatePhone } from './utils';
 
@@ -49,9 +48,6 @@ export const AddButton = () => {
       return;
     }
 
-    const usersString = localStorage.getItem('users') || '[]';
-    const users: User[] = JSON.parse(usersString);
-
     const newUser = {
       name,
       email,
@@ -59,9 +55,7 @@ export const AddButton = () => {
       phone,
     };
 
-    const newUsers = [...users, newUser];
-
-    localStorage.setItem('users', JSON.stringify(newUsers));
+    dispatch(mainActions.fetchPutUser(newUser));
 
     navigate('/');
   };
